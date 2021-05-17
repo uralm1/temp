@@ -8,7 +8,9 @@ RUN apk update && \
 
 # install perl dependences
 RUN curl -L https://cpanmin.us | perl - App::cpanminus
-RUN cpanm DateTime::Locale -M https://cpan.metacpan.org
+
+RUN cpanm DateTime::Locale -M https://cpan.metacpan.org || cat /root/.cpanm/work/*/build.log
+
 RUN cd /src && \
   cpanm --installdeps . -M https://cpan.metacpan.org
 # cleanup
