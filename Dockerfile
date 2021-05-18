@@ -9,7 +9,9 @@ RUN apk update && \
 # install perl dependences
 RUN curl -L https://cpanmin.us | perl - App::cpanminus
 
-RUN cpanm DateTime::Locale -M https://cpan.metacpan.org || cat /root/.cpanm/work/*/build.log
+# doesnt build in docker hub cloud
+#RUN cpanm DateTime::Locale -M https://cpan.metacpan.org || cat /root/.cpanm/work/*/build.log
+RUN cpanm --force DateTime::Locale -M https://cpan.metacpan.org
 
 RUN cd /src && \
   cpanm --installdeps . -M https://cpan.metacpan.org
